@@ -10,13 +10,13 @@
     $texto = $_SESSION['id']. '#'. implode('#', $_POST). PHP_EOL;
 
     //abrindo o arquivo
-    $arquivo = fopen('../app_help_desk private/arquivo.hd', 'a');
+    $arquivo = fopen('../../app_help_desk private/arquivo.hd', 'a');
     //escrevendo o texto
     fwrite($arquivo, $texto);
     //fechando o arquivo
     fclose($arquivo);
 
     //echo $texto;
-    header('location: abrir_chamado.php');
+    header('location: ../pages/abrir_chamado.php');
 
 ?>

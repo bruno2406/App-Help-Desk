@@ -32,10 +32,10 @@
 		$_SESSION['autenticado'] = 'SIM';
 		$_SESSION['id'] = $usuario_id;
 		$_SESSION['perfil_id'] = $usuario_perfil_id;
-		header("location: home.php");
+		header("location: ../pages/home.php");
 	} else {
 		$_SESSION['autenticado'] = 'NAO';
-		header("location: index.php?login=erro");
+		header("location: ../index.php?login=erro");
 	}
 
   ?>

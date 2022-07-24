@@ -1,5 +1,5 @@
 <?php  
-  require_once "validador_acesso.php";
+  require_once "../config/validador_acesso.php";
 ?>
 
 <?php   
@@ -8,7 +8,7 @@
   $chamados = array();
 
   //Abrir o arquivo.hd
-  $arquivo = fopen('../app_help_desk private/arquivo.hd', 'r');
+  $arquivo = fopen('../../app_help_desk private/arquivo.hd', 'r');
 
   //Enquanto houve registros (linhas) a serem recuperados
   while (!feof($arquivo)) { //Testa pelo final o arquivo
@@ -55,12 +55,12 @@
 
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">
-        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="../ref/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
         App Help Desk
       </a>
       <ul class="navbar-nav">
         <li class="nav-item ">
-          <a class="nav-link" href="logoff.php">SAIR</a>
+          <a class="nav-link" href="../config/logoff.php">SAIR</a>
         </li>
       </ul>
     </nav>
