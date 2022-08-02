@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	require_once "auth.php";
 
 
 	//variável que verifica se a autenticação foi realizada
@@ -7,31 +8,22 @@
 	$usuario_id = null;
 	$usuario_perfil_id = null;
 
-	$perfis = array(1 => 'Administrativo', 2 => 'Usuário');
+	$query = "SELECT * FROM usuarios";
+	$stmt = $conexao->query($query);
 
-	//usuários do Sistema
-	$usuariaos_app = array(
-		array('id' => 1, 'email' => 'adm@gmail.com', 'senha' => '123456', 'perfil_id' => 1),
-		array('id' => 2, 'email' => 'user@gmail.com', 'senha' => '123456', 'perfil_id' => 1),
-		array('id' => 3, 'email' => 'jose@gmail.com', 'senha' => '123456', 'perfil_id' => 2),
-		array('id' => 4, 'email' => 'maria@gmail.com', 'senha' => '123456', 'perfil_id' => 2)
-	);
-
-
-	foreach ($usuariaos_app as $user) {
-		if ($user['email'] == $_POST['email'] && $user['senha'] == $_POST['senha']) {
+	for ($x = 0;$result = $stmt->fetchAll(PDO::FETCH_ASSOC);$x++) {
+		if ($result[$x]['email'] == $_POST['email'] && $result[$x]['senha'] == $_POST['senha']) {
 
 			$usuario_autenticado = true;
-			$usuario_id = $user['id'];
-			$usuario_perfil_id = $user['perfil_id'];
+			$usuario_id = $result[$x]['id_usuario'];
+			$usuario_perfil_id = $result[$x]['id_perfil'];
 		} 
 	}
 
 	if ($usuario_autenticado) {
-		echo 'usuário autenticado';
 		$_SESSION['autenticado'] = 'SIM';
 		$_SESSION['id'] = $usuario_id;
-		$_SESSION['perfil_id'] = $usuario_perfil_id;
+		$_SESSION['id_perfil'] = $usuario_perfil_id;
 		header("location: ../pages/home.php");
 	} else {
 		$_SESSION['autenticado'] = 'NAO';

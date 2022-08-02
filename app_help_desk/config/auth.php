@@ -1,6 +1,6 @@
 <?php
 
-    $dsn = "mysql:host=localhost;dbname=xapp_help_desk";
+    $dsn = "mysql:host=localhost;dbname=app_help_desk";
     $usuario = "root";
     $senha = "";
 

@@ -1,34 +1,30 @@
 <?php  
   require_once "../config/validador_acesso.php";
+  require_once "../config/auth.php";
 ?>
 
 <?php   
 
+  
   //Chamados
   $chamados = array();
-
   //Abrir o arquivo.hd
   $arquivo = fopen('../../app_help_desk private/arquivo.hd', 'r');
-
   //Enquanto houve registros (linhas) a serem recuperados
   while (!feof($arquivo)) { //Testa pelo final o arquivo
     //linhas
     $registro = fgets($arquivo);
-
     $registro_detalhes = explode('#', $registro);
 
-    if($_SESSION['perfil_id'] == 2){
-
+    if($_SESSION['id_perfil'] == 2){
       if ($_SESSION['id'] != $registro_detalhes[0]) {
         continue;
       }else {
         $chamados[] = $registro;
       }
-
     }else {
       $chamados[] = $registro;
     }
-    
   }
   //Fechar o arquivo aberto
   fclose($arquivo);
