@@ -5,9 +5,21 @@
 
 <?php   
 
-  
-  //Chamados
+  $id_usuario = $_SESSION['id'];
   $chamados = array();
+
+  if($_SESSION['id_perfil'] == 2){
+    $query = "SELECT * FROM chamados WHERE id_usuario = '". $id_usuario. "'";
+    $stmt = $conexao->query($query);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $chamados[] = $result;
+  }else {
+    $query = "SELECT * FROM chamados";
+    $stmt = $conexao->query($query);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+  
+  /*Recuperando dados através do arquivo
   //Abrir o arquivo.hd
   $arquivo = fopen('../../app_help_desk private/arquivo.hd', 'r');
   //Enquanto houve registros (linhas) a serem recuperados
@@ -28,7 +40,7 @@
   }
   //Fechar o arquivo aberto
   fclose($arquivo);
-
+  */
 ?>
 
  <html>
@@ -72,23 +84,13 @@
             
             <div class="card-body">
 
-              <?php foreach($chamados as $chamado) { ?>
-
-                <?php 
-                  
-                  $chamado_dados = explode('#', $chamado);
-
-                  if(count($chamado_dados) < 3) {
-                    continue;
-                  }
-                  
-                ?>
+              <?php foreach($result as $key => $chamado) { ?>
                 
                 <div class="card mb-3 bg-light">
                   <div class="card-body">
-                    <h5 class="card-title"><?php echo $chamado_dados[1]; ?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamado_dados[2]; ?></h6>
-                    <p class="card-text"><?php echo $chamado_dados[3]; ?></p>
+                    <h5 class="card-title"><?php echo $chamado['titulo']; ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamado['categoria']; ?></h6>
+                    <p class="card-text"><?php echo $chamado['descricao']; ?></p>
                   </div>
                 </div>
                 
