@@ -2,7 +2,6 @@
 
     require_once "auth.php";
     session_start();
-    $id_usuario = $_SESSION['id'];
 
     //Guardando os dados no banco de dados
 
@@ -10,14 +9,13 @@
     $categoria = strtoupper(isset($_POST['categoria'])?$_POST['categoria']:""); 
     $descricao = strtoupper(isset($_POST['descricao'])?$_POST['descricao']:""); 
 
-    $query = "INSERT INTO `chamados`(`titulo`, `categoria`, `descricao`, `id_usuario`) VALUES 
-    (?,?,?,?)";
+    $query = "INSERT INTO `chamados`(`titulo`, `categoria`, `descricao`) VALUES 
+    (?,?,?)";
 
     $stmt = $conexao->prepare($query);
     $stmt->bindValue(1, $titulo);
     $stmt->bindValue(2, $categoria);
     $stmt->bindValue(3, $descricao);
-    $stmt->bindValue(4, $id_usuario);
 
     if($stmt->execute()) {
 

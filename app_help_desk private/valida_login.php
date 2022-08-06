@@ -9,13 +9,14 @@
 	$usuario_perfil_id = null;
 
 	$query = "SELECT * FROM usuarios";
+	$stmt = $conexao->query($query);
 
-	foreach($conexao->query($query) as $key => $result) {
-		if ($result['email'] == $_POST['email'] && $result['senha'] == $_POST['senha']) {
+	for ($x = 0;$result = $stmt->fetchAll(PDO::FETCH_ASSOC);$x++) {
+		if ($result[$x]['email'] == $_POST['email'] && $result[$x]['senha'] == $_POST['senha']) {
 
 			$usuario_autenticado = true;
-			$usuario_id = $result['id_usuario'];
-			$usuario_perfil_id = $result['id_perfil'];
+			$usuario_id = $result[$x]['id_usuario'];
+			$usuario_perfil_id = $result[$x]['id_perfil'];
 		} 
 	}
 
