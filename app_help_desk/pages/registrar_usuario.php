@@ -1,11 +1,4 @@
-<html> 
-  <?php
-
-    $email = isset($_POST['email'])?$_POST['email']:""; 
-    $senha = isset($_POST['senha'])?$_POST['senha']:"";
-
-  ?>
-
+<html>
   <head>
     <meta charset="utf-8" />
     <title>App Help Desk</title>
@@ -25,7 +18,7 @@
 
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">
-        <img src="ref/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="../ref/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
         App Help Desk
       </a>
     </nav>
@@ -39,12 +32,18 @@
               Login
             </div>
             <div class="card-body">
-              <form action="config/valida_login.php" method="post">
-                <div class="form-group">
-                  <input name="email" type="email" class="form-control" placeholder="E-mail" value="<?php echo ($email); ?>">
+              <form action="../database/registar_usuario.php" method="post">
+              <div class="form-group">
+                  <input required name="nome" type="text" class="form-control" placeholder="Nome">
                 </div>
                 <div class="form-group">
-                  <input name="senha" type="password" class="form-control" placeholder="Senha" value="<?php echo ($senha); ?>">
+                  <input required name="sobrenome" type="text" class="form-control" placeholder="Sobrenome">
+                </div>
+                <div class="form-group">
+                  <input required autocomplete="off" name="email" type="email" class="form-control" placeholder="E-mail">
+                </div>
+                <div class="form-group">
+                  <input required autocomplete="off" name="senha" type="password" class="form-control" placeholder="Senha">
                 </div>
 
                 <?php 
@@ -52,7 +51,7 @@
                 ?>
 
                <div class="text-danger">
-                Usuário ou Senha Inválido(s)
+                Campo(s) Inválido(s)
                </div>
 
                 <?php } ?>
@@ -68,11 +67,8 @@
                 <?php } ?>
 
 
-                <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>
+                <button class="btn btn-lg btn-info btn-block" type="submit">Criar Conta</button>
               </form>
-              <div class="text-center">
-                  já tem uma conta?<a class="text-primary" href="pages/registrar_usuario.php">Criar Conta</a>
-              </div>
             </div>
           </div>
         </div>
