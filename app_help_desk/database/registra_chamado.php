@@ -1,21 +1,22 @@
-<?php 
+<?php  
 
-    require_once "auth.php";
+    require_once "../config/auth.php";
     session_start();
+    $id_usuario = $_SESSION['id'];
 
     //Guardando os dados no banco de dados
-
     $titulo = strtoupper(isset($_POST['titulo'])?$_POST['titulo']:""); 
     $categoria = strtoupper(isset($_POST['categoria'])?$_POST['categoria']:""); 
     $descricao = strtoupper(isset($_POST['descricao'])?$_POST['descricao']:""); 
 
-    $query = "INSERT INTO `chamados`(`titulo`, `categoria`, `descricao`) VALUES 
-    (?,?,?)";
+    $query = "INSERT INTO `chamados`(`titulo`, `categoria`, `descricao`, `id_usuario`) VALUES 
+    (?,?,?,?)";
 
     $stmt = $conexao->prepare($query);
     $stmt->bindValue(1, $titulo);
     $stmt->bindValue(2, $categoria);
     $stmt->bindValue(3, $descricao);
+    $stmt->bindValue(4, $id_usuario);
 
     if($stmt->execute()) {
 
@@ -36,7 +37,7 @@
 
         header('location: ../pages/abrir_chamado.php?status=1');
     } else {
-        header('location: ../pages/abrir_chamado.php?status=2');
+        //header('location: ../pages/abrir_chamado.php?status=2');
     }
 
     

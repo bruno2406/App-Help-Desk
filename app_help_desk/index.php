@@ -1,11 +1,4 @@
 <html> 
-  <?php
-
-    $email = isset($_POST['email'])?$_POST['email']:""; 
-    $senha = isset($_POST['senha'])?$_POST['senha']:"";
-
-  ?>
-
   <head>
     <meta charset="utf-8" />
     <title>App Help Desk</title>
@@ -41,10 +34,10 @@
             <div class="card-body">
               <form action="config/valida_login.php" method="post">
                 <div class="form-group">
-                  <input name="email" type="email" class="form-control" placeholder="E-mail" value="<?php echo ($email); ?>">
+                  <input name="email" type="email" class="form-control" placeholder="E-mail">
                 </div>
                 <div class="form-group">
-                  <input name="senha" type="password" class="form-control" placeholder="Senha" value="<?php echo ($senha); ?>">
+                  <input name="senha" type="password" class="form-control" placeholder="Senha">
                 </div>
 
                 <?php 

@@ -47,7 +47,7 @@
                 </div>
 
                 <?php 
-                  if(isset($_GET['login']) && $_GET['login'] == 'erro') {
+                  if(isset($_GET['registrar']) && $_GET['registrar'] == 'erro') {
                 ?>
 
                <div class="text-danger">
@@ -55,18 +55,6 @@
                </div>
 
                 <?php } ?>
-
-                <?php 
-                  if(isset($_GET['login']) && $_GET['login'] == 'erro2') {
-                ?>
-
-               <div class="text-danger">
-                Faça Login Antes de Acessar as Páginas Protegidas
-               </div>
-
-                <?php } ?>
-
-
                 <button class="btn btn-lg btn-info btn-block" type="submit">Criar Conta</button>
               </form>
             </div>

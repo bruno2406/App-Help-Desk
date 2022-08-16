@@ -20,22 +20,25 @@
     $stmt->bindValue(4, $senha);
 
     if($stmt->execute()) {
-            $content = http_build_query(array(
-            'email' => $email,
-            'senha' => $senha,
-            ));
-
-            $context = stream_context_create(array(
-            'http' => array(
-            'method' => 'POST',
-            'content' => $content,
-            )
-            ));
-
-            $result = file_get_contents('../index.php', null, $context);
-        header('location: ../index.php?status=1');
+        
+        $query = "SELECT * FROM usuarios";
+        $stmt = $conexao->query($query);
+    
+        foreach($conexao->query($query) as $key => $result) {
+            if ($result['email'] == $_POST['email'] && $result['senha'] == $_POST['senha']) {
+                
+                $_SESSION['autenticado'] = 'SIM';
+                $_SESSION['id'] = $result['id_usuario'];
+                $_SESSION['id_perfil'] = $result['id_perfil'];
+                header("location: ../pages/home.php");
+            } else {
+                $_SESSION['autenticado'] = 'NAO';
+                header("location: ../index.php?login=erro");
+            }
+        }
+        header('location: ../pages/home.php');
     } else {
-        header('location: ../index.php?status=2');
+        header('location: ../pages/registrar_usuario.php?registrar=erro');
     }
 
     
