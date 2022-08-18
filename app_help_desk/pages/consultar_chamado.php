@@ -13,34 +13,13 @@
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $chamados[] = $result;
   }else {
-    $query = "SELECT * FROM chamados";
+    $query = "SELECT * FROM chamados LEFT JOIN usuarios ON (chamados.id_usuario = usuarios.id_usuario)";
     $stmt = $conexao->query($query);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    /*echo "<pre>";
+    print_r($result);
+    echo "</pre>";*/
   }
-
-  /*Recuperando dados através do arquivo
-  //Chamados
-  $chamados = array();
-  //Abrir o arquivo.hd
-  $arquivo = fopen('../../app_help_desk private/arquivo.hd', 'r');
-  //Enquanto houve registros (linhas) a serem recuperados
-  while (!feof($arquivo)) { //Testa pelo final o arquivo
-    //linhas
-    $registro = fgets($arquivo);
-    $registro_detalhes = explode('#', $registro);
-
-    if($_SESSION['id_perfil'] == 2){
-      if ($_SESSION['id'] != $registro_detalhes[0]) {
-        continue;
-      }else {
-        $chamados[] = $registro;
-      }
-    }else {
-      $chamados[] = $registro;
-    }
-  }
-  //Fechar o arquivo aberto
-  fclose($arquivo); */
 
 ?>
 
@@ -89,6 +68,9 @@
                 
                 <div class="card mb-3 bg-light">
                   <div class="card-body">
+                    <?php if($_SESSION['id_perfil'] == 1) { ?>
+                    <p class="card-text"><?php echo 'ID: '. $chamado['id_usuario']. ' Usuário: '. $chamado['nome']. ' '. $chamado['sobrenome']; ?></p>
+                    <?php } ?>
                     <h5 class="card-title"><?php echo $chamado['titulo']; ?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamado['categoria']; ?></h6>
                     <p class="card-text"><?php echo $chamado['descricao']; ?></p>

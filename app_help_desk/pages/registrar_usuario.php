@@ -62,4 +62,7 @@
         </div>
     </div>
   </body>
+
+  <script src="../config/js/jquery-3.6.0.min.js"></script>
+  <script src="../config/js/registrar_usuario"></script>
 </html>
