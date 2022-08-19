@@ -1,0 +1,15 @@
+.criar_conta span{
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    pointer-events: none;
+    transition: 0.5s;
+    opacity: .5;
+}
+
+.criar_conta input:focus ~ span,
+.criar_conta input:valid ~ span {
+    transform: translateY(-48px);
+    font-size: 14px;
+    opacity: 1;
+}
